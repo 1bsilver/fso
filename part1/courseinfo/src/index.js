@@ -39,11 +39,13 @@ const Total = (props) => {
           props.prop[2].exercise}
       </p>
     </div>
-  );
+  ); 
 };
 
 const App = () => {
-  const exercises = [
+  const course =  {
+  name : "Half Stack application development",
+  parts : [
     {
       name: "Fundamentals of React",
       exercise: 10,
@@ -55,15 +57,16 @@ const App = () => {
     {
       name: "State of a component",
       exercise: 14,
-    },
-  ];
+    }
+  ]
+}
   console.log("Hello from component!");
 
   return (
     <div>
-      <Header course="Half Stack application development" />
-      <Content content={exercises} />
-      <Total prop={exercises} />
+      <Header course={course.name} />
+      <Content content={course.parts} />
+      <Total prop={course.parts} />
     </div>
   );
 };
