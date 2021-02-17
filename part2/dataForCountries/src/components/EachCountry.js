@@ -3,6 +3,7 @@ import Detail from "./detail";
 
 const EachCountry = ({ countries }) => {
   const [show, setShow] = useState(false);
+  const label = show ? "hide" : "show"
 
   const buttonClick = (event) => {
     setShow(!show);
@@ -13,14 +14,14 @@ const EachCountry = ({ countries }) => {
     return (
       <div>
         <Detail all={countries} />
-        <button onClick={buttonClick}> {show ? "hide" : "show"} </button>
+        <button onClick={buttonClick}> {label} </button>
       </div>
     );
   } else {
     return (
       <div>
         {countries.name}
-        <button onClick={buttonClick}>{show ? "hide" : "show"}</button>
+        <button onClick={buttonClick}>{label}</button>
       </div>
     );
   }
