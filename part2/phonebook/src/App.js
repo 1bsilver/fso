@@ -52,6 +52,17 @@ const App = () => {
     person.name.toLowerCase().includes(filter)
   );
 
+  const handleButton = (event) => {
+    const id = event.target.value
+    console.log(id)
+    if(window.confirm(`Are you sure you want to delete ${event.target.name} from the record?`)) {
+    personServices.remove(id)
+    .then(test=> {
+      setPersons(persons.filter(name=> name.id !== Number(id)))
+    })
+  }
+  }
+  
   useEffect(()=> {
     console.log('effect')
     personServices.getAll()
@@ -60,6 +71,8 @@ const App = () => {
       setPersons(returnedData)
     })
   },[])
+
+
 
   return (
     <div>
@@ -78,7 +91,7 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
-      <Person numbersToShow={numbersToShow} />
+      <Person numbersToShow={numbersToShow} handleClick={handleButton} />
     </div>
   );
 };
