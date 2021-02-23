@@ -11,13 +11,32 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   const names = persons.map((person) => person.name);
+  const numbers = persons.map(person => person.number)
 
   const addButton = (event) => {
     event.preventDefault();
-    if (names.includes(newName)) {
+    if (names.includes(newName) && numbers.includes(newNumber)) {
       alert(`${newName} is already added to the phonebook`);
-      // console.log('includes already')
-    } else {
+      // console.log('includes already') 
+    }
+    else if (names.includes(newName)) {
+     if (window.confirm(`${newName} already exists. Would you like to update the number for it`)) {
+       const person = persons.find(n => n.name === newName)
+       const newObject = {
+         ...person,
+         number: newNumber
+       };
+        personServices
+        .update(newObject,person.id)
+        .then(returnedPerson => {
+          // console.log(person.id)
+          setPersons(persons.map(per => per.id !== Number(person.id) ? per : returnedPerson));
+          setNewName("");
+          setNewNumber("");
+        })
+      }
+    }
+    else {
       const NameObject = {
         name: newName,
         number: newNumber,
@@ -31,7 +50,6 @@ const App = () => {
           setNewNumber("");
 
         })
-      
     }
   };
 
