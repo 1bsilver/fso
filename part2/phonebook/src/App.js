@@ -3,15 +3,12 @@ import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Person from "./components/Person";
 import personServices from "./services/persons"
-import Notification from "./components/Notification"
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
-  const [notif, setNotif] = useState(null);
-  const [col, setCol] = useState({});
 
   const names = persons.map((person) => person.name);
   const numbers = persons.map(person => person.number)
@@ -36,19 +33,6 @@ const App = () => {
           setPersons(persons.map(per => per.id !== Number(person.id) ? per : returnedPerson));
           setNewName("");
           setNewNumber("");
-          setNotif(`Succesfully updated the number of ${returnedPerson.name}`)
-          setCol({color:'green'})
-          setTimeout(()=> {
-            setNotif(null)
-          },2000)
-        })
-        .catch(error => {
-          console.log(error)
-          setNotif(`Information of ${person.name} has already been removed from the server`)
-          setCol({color:'red'})
-          setTimeout(()=> {
-            setNotif(null)
-          },2000)
         })
       }
     }
@@ -64,11 +48,7 @@ const App = () => {
           setPersons(persons.concat(returnedPerson));
           setNewName("");
           setNewNumber("");
-          setNotif(`Succesfully added ${returnedPerson.name}`)
-          setCol({color:'green'})
-          setTimeout(()=> {
-            setNotif(null)
-          },2000)
+
         })
     }
   };
@@ -92,20 +72,11 @@ const App = () => {
 
   const handleButton = (event) => {
     const id = event.target.value
-    const name= event.target.name
     console.log(id)
-    if(window.confirm(`Are you sure you want to delete ${name} from the record?`)) {
+    if(window.confirm(`Are you sure you want to delete ${event.target.name} from the record?`)) {
     personServices.remove(id)
     .then(test=> {
       setPersons(persons.filter(name=> name.id !== Number(id)))
-    }) 
-    .catch(error => {
-      console.log(error)
-      setNotif(`Information of ${name} has already been removed from the server`)
-      setCol({color:'red'})
-      setTimeout(()=> {
-        setNotif(null)
-      },2000)
     })
   }
   }
@@ -124,8 +95,6 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      
-      <Notification message={notif} col={col} />
 
       <Filter filter={filter} handleFilter={handleFilter} />
 
