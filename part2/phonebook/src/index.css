@@ -1,0 +1,44 @@
+
+@import url('https://fonts.googleapis.com/css?family=Sofia');
+
+.notif {
+    font-size: 20px;
+    background: lightgrey;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-style: double;
+    border-radius: 5px;
+}
+
+body {
+    background-color:rgb(255, 140, 179);
+    text-align: center;
+    color:rgb(72, 78, 83);
+    font-family: 'Sofia';
+}
+
+h2, h3{
+    background-color: rgb(103, 214, 103);
+    color: white;
+}
+
+h2 {
+    border-radius: 20px 20px 0px 0px;
+}
+
+p, li{
+    background-color: lightgray;
+    color:rgb(72, 78, 83);
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 1px;
+}
+
+.white {
+    background-color: white;
+    border-radius: 20px;
+    margin: 5% 20% 5% 20%;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+}
